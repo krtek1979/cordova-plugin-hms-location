@@ -123,17 +123,6 @@ public class HMSFusedLocation extends HMSCordovaPlugin implements ResultHandler 
 
     // @CordovaMethod
     public void checkLocationSettings(final JSONObject locationRequestMap, final CallbackContext cordovaCallback) throws JSONException {
-        int statusCode = ((ApiException) e).getStatusCode();
-        switch (statusCode) {
-            case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                try {
-                    ResolvableApiException rae = (ResolvableApiException) e;
-                    rae.startResolutionForResult(cordova.getActivity(), 0);
-                } catch (IntentSender.SendIntentException sie) {
-                    Log.d(TAG, sie.getMessage());
-                }
-                break;
-        }
         if (LocationUtils.checkForObstacles(cordova, fusedLocationProviderClient, cordovaCallback)) {
             return;
         }
@@ -172,6 +161,17 @@ public class HMSFusedLocation extends HMSCordovaPlugin implements ResultHandler 
             }
         }).addOnFailureListener(e -> {
             Log.e(TAG, "getLastLocation::onFailure -> " + e.getMessage());
+            int statusCode = ((ApiException) e).getStatusCode();
+                switch (statusCode) {
+                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                        try {
+                            ResolvableApiException rae = (ResolvableApiException) e;
+                            rae.startResolutionForResult(cordova.getActivity(), 0);
+                        } catch (IntentSender.SendIntentException sie) {
+                            Log.d(TAG, sie.getMessage());
+                        }
+                        break;
+                }
             cordovaCallback.error(e.getMessage());
         });
 
