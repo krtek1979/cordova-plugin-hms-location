@@ -15,10 +15,4 @@
  * limitations under the License.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.init = void 0;
-const utils_1 = require("./utils");
-function init() {
-    return utils_1.asyncExec('HMSLocationKit', 'init', []);
-}
-exports.init = init;
-//# sourceMappingURL=HMSLocationKit.js.map
+//# sourceMappingURL=CommonTypes.js.map

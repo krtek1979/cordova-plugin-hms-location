@@ -19,8 +19,9 @@ The package is described as follows:
 
 ## 2. Installation Guide
 
-1. Download `cordova-plugin-hms-location`.
-2. Add Android platform to your project if you haven't yet.
+### Cordova
+
+1. Add Android platform to your project if you haven't yet.
 
 ``` shell
 cordova platform add android
@@ -29,13 +30,33 @@ cordova platform add android
 3. Add this plugin to your project by running the following command in root directory of your project:
 
 ``` shell
-cordova plugin add PATH_TO_CORDOVA_LOCATION_PLUGIN
+cordova plugin add @hmscore/cordova-hms-plugin-location
 ```
 
 4. Run your app.
 
 ``` shell
 cordova run android
+```
+
+### Ionic
+
+1. Add this plugin to your project by running the following command in root directory of your project:
+
+```shell
+npm install @hmscore/cordova-hms-plugin-location
+```
+
+2. For full Ionic support you should also install the Ionic wrapper. Firstly, install `@ionic-native/core`:
+
+```shell
+npm install @ionic-native/core
+```
+
+3. Copy the folder `node_modules/@hmscore/cordova-plugin-hms-location/ionic/dist/hms-location` into `node_modules/@ionic-native`.
+
+```shell
+cp -r node_modules/@hmscore/cordova-plugin-hms-location/ionic/dist/hms-location node_modules/@ionic-native
 ```
 
 
@@ -143,6 +164,7 @@ cordova run android
 | Promise<LocationAvailability>  | getLocationAvailability()                   |
 | Promise<RequestCode>           | removeLocationUpdates(requestCode)          |
 | Promise<RequestCode>           | requestLocationUpdates(locationRequest)     |
+| Promise<RequestCode>           | requestLocationUpdatesEx(locationRequest)   |
 | Promise<>                      | setMockMode(isMockMode)                     |
 | Promise<>                      | setMockLocation(mockLocation)               |
 | Promise<LocationData>          | getLastLocationWithAddress(locationRequest) |
@@ -264,29 +286,6 @@ cordova run android
 | Promise<>                 | deleteGeofenceList(geofenceRequestId)                                |
 
 
-### Usage Notes
-
-By default every function returns a `Promise`. Alternatively you can use callback variations of these functions by prepending `cb` to the function name.
-
-```javascript
-// async version
-try {
-   let result = await HMSFusedLocation.setMockMode(true);
-   console.log(message);
-} catch (err) {
-   console.log(err);
-}
-
-// callback version
-HMSFusedLocation.cbSetMockMode(true,
-   (result) => { // Success callback
-      console.log(result);
-   },
-   (err)=>{ // Error callback
-      console.log(err);
-   }
-);
-```
 
 ---
 

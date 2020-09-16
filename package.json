@@ -1,7 +1,8 @@
 {
-  "name": "cordova-plugin-hms-location",
-  "version": "4.0.3",
-  "description": "cordova-plugin-hms-location",
+  "name": "@hmscore/cordova-plugin-hms-location",
+  "version": "4.0.4-300",
+  "description": "LocationKit plugin for Cordova and Ionic.",
+  "types": "types/index.d.ts",
   "cordova": {
     "id": "cordova-plugin-hms-location",
     "platforms": [
@@ -15,16 +16,18 @@
   ],
   "scripts": {
     "test": "npm run eslint",
-    "eslint": "node node_modules/eslint/bin/eslint www && node node_modules/eslint/bin/eslint src && node node_modules/eslint/bin/eslint tests"
+    "eslint": "node node_modules/eslint/bin/eslint www && node node_modules/eslint/bin/eslint src && node node_modules/eslint/bin/eslint tests",
+    "compile-ionic": "PLUGIN_DIR=$(pwd); mkdir -p ../ionic-native/src/@ionic-native/plugins/hms-location; cp ionic/wrapper/index.ts ../ionic-native/src/@ionic-native/plugins/hms-location/; cd ../ionic-native; npm run build; cd \"$PLUGIN_DIR\"; cp ../ionic-native/dist/@ionic-native/plugins/hms-location/ ionic/dist -r"
   },
   "author": "Huawei",
   "license": "Apache-2.0",
   "engines": [{
-    "name": "cordova",
-    "version": ">=3.0.0"
+      "name": "cordova",
+      "version": ">=3.0.0"
   }],
   "devDependencies": {
-    "eslint": "^6.8.0",
+    "@types/cordova": "0.0.34",
+    "eslint": "^3.19.0",
     "eslint-config-semistandard": "^11.0.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.3.0",
@@ -33,12 +36,19 @@
     "eslint-plugin-standard": "^3.0.1"
   },
   "files": [
-    "res/**",
-    "src/**",
-    "www/**",
+    "ionic",
+    "res",
+    "src",
+    "www",
+    "scripts",
+    "types",
     "LICENCE",
     "package.json",
     "plugin.xml",
-    "README.md"
+    "README.md",
+    "ionic",
+    "scripts",
+    "types",
+    "tsconfig.json"
   ]
 }
